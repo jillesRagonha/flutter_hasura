@@ -1,3 +1,4 @@
+import 'package:flutter_hasura/app/models/produto_model.dart';
 import 'package:flutter_hasura/app/modules/home/repositories/home_repository.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,9 +11,9 @@ abstract class _HomeControllerBase with Store {
   final HomeRepository _repository;
 
   _HomeControllerBase(this._repository){
-    listaProdutos= _repository.getProduto();
+    _repository.getProduto().then((value) => listaProdutos = value);
   }
 
   @observable
-  List<String> listaProdutos = [];
+  List<ProdutoModel> listaProdutos = [];
 }

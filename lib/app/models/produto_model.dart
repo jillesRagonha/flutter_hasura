@@ -46,4 +46,11 @@ class ProdutoModel {
         tipoProduto: tipoProduto ?? this.tipoProduto,
         categoriaProduto: categoriaProduto ?? this.categoriaProduto,
       );
+
+  static List<ProdutoModel> fromJsonList(List list){
+    if(list == null) return null;
+    return list.map<ProdutoModel>((item){
+      ProdutoModel.fromJson(item);
+    }).toList();
+  }
 }
