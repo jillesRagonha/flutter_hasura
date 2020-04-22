@@ -17,6 +17,8 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  json_annotation: ^3.0.1
+  hasura_connect: ^1.2.1+1
   dio: ^3.0.9
   flutter_mobx: ^1.1.0
   mobx: ^1.1.1
@@ -29,6 +31,7 @@ dependencies:
 
 dev_dependencies:
   mockito: ^4.1.1
+  json_serializable: ^3.3.0
   mobx_codegen: ^1.0.3
   build_runner: ^1.8.1
   flutter_test:
