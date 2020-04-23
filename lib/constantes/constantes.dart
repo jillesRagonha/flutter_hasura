@@ -12,3 +12,23 @@ const queryBuscarProdutos = """
       }
   }
 }""";
+
+const queryBuscarTipos= """
+query GetTipos {
+  tipo_produto {
+    id
+    tipo
+  }
+}
+
+""";
+
+const queryBuscarCategorias= """
+query GetCategorias {
+  categoria_produto {
+    id
+    categoria
+  }
+}
+
+""";

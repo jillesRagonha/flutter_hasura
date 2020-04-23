@@ -11,36 +11,37 @@ class ProdutoModel {
 
   ProdutoModel(
       {this.nome,
-        this.id,
-        this.valor,
-        this.tipoProduto,
-        this.categoriaProduto});
+      this.id,
+      this.valor,
+      this.tipoProduto,
+      this.categoriaProduto});
 
-  ProdutoModel produtoModelFromJson(String str) => ProdutoModel.fromJson(json.decode(str));
+  ProdutoModel produtoModelFromJson(String str) =>
+      ProdutoModel.fromJson(json.decode(str));
 
   String produtoModelToJson(ProdutoModel data) => json.encode(data.toJson());
 
-  factory ProdutoModel.fromJson(String str) => ProdutoModel.fromMap(json.decode(str));
+  factory ProdutoModel.fromJson(String str) =>
+      ProdutoModel.fromMap(json.decode(str));
+
   String toJson() => json.encode(toMap());
 
-
-
   factory ProdutoModel.fromMap(Map<String, dynamic> json) => ProdutoModel(
-    id: json["id"],
-    nome: json["nome"],
-    valor: json["valor"].toDouble(),
-    tipoProduto: TipoProdutoModel.fromJson(json["tipo_produto"]),
-    categoriaProduto:
-    CategoriaProdutoModel.fromJson(json["categoria_produto"]),
-  );
+        id: json["id"],
+        nome: json["nome"],
+        valor: json["valor"].toDouble(),
+        tipoProduto: TipoProdutoModel.fromMap(json["tipo_produto"]),
+        categoriaProduto:
+            CategoriaProdutoModel.fromMap(json["categoria_produto"]),
+      );
 
   Map<String, dynamic> toMap() => {
-    "id": id,
-    "nome": nome,
-    "valor": valor,
-    "tipo_produto": tipoProduto.toJson(),
-    "categoria_produto": categoriaProduto.toJson(),
-  };
+        "id": id,
+        "nome": nome,
+        "valor": valor,
+        "tipo_produto": tipoProduto.toJson(),
+        "categoria_produto": categoriaProduto.toJson(),
+      };
 
   ProdutoModel copyWith({
     String id,

@@ -2,7 +2,6 @@
 import 'package:flutter_hasura/app/models/produto_model.dart';
 import 'package:flutter_hasura/constantes/constantes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/dio.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 
 class HomeRepository extends Disposable {
@@ -20,4 +19,5 @@ class HomeRepository extends Disposable {
   //dispose will be called automatically
   @override
   void dispose() {}
+
 }

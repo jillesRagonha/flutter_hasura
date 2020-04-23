@@ -38,7 +38,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "/addProduto");
+        },
         child: Icon(
           Icons.add,
           color: Colors.white,
