@@ -27,10 +27,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           return ListView.builder(
             itemBuilder: (BuildContext context, int index) {
               return CardProdutoWidget(
-                nomeProduto: "Produto $index",
-                valor: "R\$ 20,00",
-                categoriaProduto: "Categoria $index",
-                tipoProduto: "Tipo $index",
+                nomeProduto: controller.listaProdutos[index].nome,
+                valor: "R\$ ${controller.listaProdutos[index].valor.toStringAsFixed(2).replaceAll(".", ",")}",
+                categoriaProduto: controller.listaProdutos[index].categoriaProduto.categoria,
+                tipoProduto: controller.listaProdutos[index].tipoProduto.tipo,
               );
             },
             itemCount: controller.listaProdutos.length,

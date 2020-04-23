@@ -73,6 +73,7 @@ class CardProdutoWidget extends StatelessWidget {
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
+
                   ),
                 ],
               ),

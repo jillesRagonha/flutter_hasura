@@ -10,8 +10,8 @@ class TipoProdutoModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "tipo": tipo,
-      };
+    "tipo": tipo,
+  };
 
   TipoProdutoModel copyWith({
     String tipo,

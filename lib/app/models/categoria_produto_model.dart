@@ -1,5 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
 class CategoriaProdutoModel {
   String id;
   String categoria;
@@ -12,8 +10,8 @@ class CategoriaProdutoModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "categoria": categoria,
-      };
+    "categoria": categoria,
+  };
 
   CategoriaProdutoModel copyWith({
     String categoria,
