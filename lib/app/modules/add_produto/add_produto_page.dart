@@ -61,6 +61,7 @@ class _AddProdutoPageState
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    onChanged: (valor) => controller.produtoModel.nome = valor,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
@@ -74,6 +75,7 @@ class _AddProdutoPageState
                     height: 20,
                   ),
                   TextFormField(
+                    onChanged: (item) => controller.produtoModel.valor = double.parse(item),
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -87,21 +89,31 @@ class _AddProdutoPageState
                   SizedBox(
                     height: 20,
                   ),
-                  CustomComboboxWidget(
-                    label: "Categoria",
-                    items: controller.categorias.map((e) => Pojo(descricao: e.categoria)).toList(),
-                    onChange: (item) {
-                      print(item.toString());
+                  Observer(
+                    builder: (BuildContext context) {
+                      return CustomComboboxWidget(
+                          label: "Categoria",
+                          items: controller.categorias
+                              .map((e) => CategoriaProdutoModel(
+                                  id: e.id, categoria: e.categoria))
+                              .toList(),
+                          onChange: (item) {
+                            controller.produtoModel.categoriaProduto = item;
+                          });
                     },
                   ),
                   Observer(
                     builder: (BuildContext context) {
                       return CustomComboboxWidget(
                         label: "Tipo",
-                        items: controller.tipos.map((e) => Pojo(descricao: e.tipo)).toList(),
-                        onChange: (item) {
-                          print(item.toString());
-                        },
+                        items: controller.tipos
+                            .map(
+                              (e) => TipoProdutoModel(id: e.id, tipo: e.tipo),
+                            )
+                            .toList(),
+
+                        onChange: (item) =>
+                            controller.produtoModel.tipoProduto = item,
                       );
                     },
                   ),
@@ -121,7 +133,9 @@ class _AddProdutoPageState
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.adicionarProduto();
+                        },
                       ),
                     ),
                   )

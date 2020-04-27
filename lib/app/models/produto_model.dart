@@ -16,6 +16,7 @@ class ProdutoModel {
       this.tipoProduto,
       this.categoriaProduto});
 
+
   ProdutoModel produtoModelFromJson(String str) =>
       ProdutoModel.fromJson(json.decode(str));
 
@@ -64,4 +65,11 @@ class ProdutoModel {
         .map<ProdutoModel>((item) => ProdutoModel.fromMap(item))
         .toList();
   }
+
+  @override
+  String toString() {
+    return 'ProdutoModel{nome: $nome, id: $id, valor: $valor, tipoProduto: $tipoProduto, categoriaProduto: $categoriaProduto}';
+  }
+
+
 }

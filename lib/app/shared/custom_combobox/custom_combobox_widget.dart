@@ -2,35 +2,37 @@ import 'package:find_dropdown/find_dropdown.dart';
 import 'package:flutter/material.dart';
 
 class CustomComboboxWidget extends StatelessWidget {
-  final List<Pojo> items;
-  final Function(Pojo) onChange;
-  final Pojo itemSelecionado;
+  final List<Object> items;
+  final Function(Object) onChange;
+  final Object itemSelecionado;
   final String label;
+  final String text;
 
   const CustomComboboxWidget(
       {Key key,
       @required this.items,
       @required this.onChange,
       this.itemSelecionado,
-      this.label})
+      this.label,
+      this.text})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FindDropdown<Pojo>(
+    return FindDropdown<Object>(
       onChanged: onChange,
       label: label,
       items: items,
       selectedItem: itemSelecionado,
-      validate: (Pojo item) {
+      validate: (Object item) {
         return item == null ? "Item obrigatório" : null;
       },
       dropdownBuilder: (context, item) {
         return Container(
           decoration: BoxDecoration(
-              border:
-                  Border.all(width: 2, color: Theme.of(context).primaryColor),
-              borderRadius: BorderRadius.circular(10)),
+            border: Border.all(width: 2, color: Theme.of(context).primaryColor),
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: item == null
               ? ListTile(
                   title: Text(
@@ -39,36 +41,11 @@ class CustomComboboxWidget extends StatelessWidget {
                   trailing: Icon(Icons.arrow_drop_down),
                 )
               : ListTile(
-                  title: Text(
-                    item.descricao,
-                  ),
+                  title: Text(itemSelecionado.toString()),
                   trailing: Icon(Icons.arrow_drop_down),
                 ),
         );
       },
     );
   }
-}
-
-class Pojo {
-  final String id;
-  final String descricao;
-
-  Pojo({this.id, this.descricao});
-
-  @override
-  String toString() {
-    return  descricao.toString();
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Pojo &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          descricao == other.descricao;
-
-  @override
-  int get hashCode => id.hashCode ^ descricao.hashCode;
 }

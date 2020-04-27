@@ -1,4 +1,5 @@
 import 'package:flutter_hasura/app/models/categoria_produto_model.dart';
+import 'package:flutter_hasura/app/models/produto_model.dart';
 import 'package:flutter_hasura/app/models/tipo_produto_model.dart';
 import 'package:flutter_hasura/constantes/constantes.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -21,6 +22,19 @@ class ProdutoRepository extends Disposable {
     var snapshot = await _hasuraConnect.query(queryBuscarTipos);
     return TipoProdutoModel.fromJsonList(
         snapshot["data"]["tipo_produto"] as List);
+  }
+
+  Future<bool> adicionarProduto(ProdutoModel produtoModel) async {
+    var mutation = mutationAddProtudo;
+    var snapshot = await _hasuraConnect.mutation(mutation, variables: {
+      "nome": produtoModel.nome,
+      "valor": produtoModel.valor,
+      "categoria": produtoModel.categoriaProduto.id,
+      "tipo": produtoModel.tipoProduto.id,
+    });
+
+    print(snapshot);
+    return snapshot["data"]["insert_produto"]["affected_rows"] > 0;
   }
 
   //dispose will be called automatically
