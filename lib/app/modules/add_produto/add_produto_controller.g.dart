@@ -61,6 +61,13 @@ mixin _$AddProdutoController on _AddProdutoControllerBase, Store {
     }, _$tiposAtom, name: '${_$tiposAtom.name}_set');
   }
 
+  final _$adicionarProdutoAsyncAction = AsyncAction('adicionarProduto');
+
+  @override
+  Future<bool> adicionarProduto() {
+    return _$adicionarProdutoAsyncAction.run(() => super.adicionarProduto());
+  }
+
   final _$_AddProdutoControllerBaseActionController =
       ActionController(name: '_AddProdutoControllerBase');
 
@@ -70,17 +77,6 @@ mixin _$AddProdutoController on _AddProdutoControllerBase, Store {
         _$_AddProdutoControllerBaseActionController.startAction();
     try {
       return super.setProdutoModel(produtoModel);
-    } finally {
-      _$_AddProdutoControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void adicionarProduto() {
-    final _$actionInfo =
-        _$_AddProdutoControllerBaseActionController.startAction();
-    try {
-      return super.adicionarProduto();
     } finally {
       _$_AddProdutoControllerBaseActionController.endAction(_$actionInfo);
     }

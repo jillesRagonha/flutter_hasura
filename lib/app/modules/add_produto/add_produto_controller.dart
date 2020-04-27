@@ -17,7 +17,7 @@ abstract class _AddProdutoControllerBase with Store {
   ProdutoModel produtoModel = ProdutoModel();
 
   @action
-  setProdutoModel(ProdutoModel produtoModel){
+  setProdutoModel(ProdutoModel produtoModel) {
     this.produtoModel = produtoModel;
   }
 
@@ -33,9 +33,10 @@ abstract class _AddProdutoControllerBase with Store {
   List<TipoProdutoModel> tipos = [];
 
   @action
-  void adicionarProduto() async{
-   await _repository.adicionarProduto(produtoModel);
-
-
+  Future<bool> adicionarProduto() async {
+    if (produtoModel != null) {
+      return await _repository.adicionarProduto(produtoModel);
+    }
+    return false;
   }
 }

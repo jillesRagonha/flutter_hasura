@@ -75,7 +75,8 @@ class _AddProdutoPageState
                     height: 20,
                   ),
                   TextFormField(
-                    onChanged: (item) => controller.produtoModel.valor = double.parse(item),
+                    onChanged: (item) =>
+                        controller.produtoModel.valor = double.parse(item),
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -92,14 +93,17 @@ class _AddProdutoPageState
                   Observer(
                     builder: (BuildContext context) {
                       return CustomComboboxWidget(
-                          label: "Categoria",
-                          items: controller.categorias
-                              .map((e) => CategoriaProdutoModel(
-                                  id: e.id, categoria: e.categoria))
-                              .toList(),
-                          onChange: (item) {
-                            controller.produtoModel.categoriaProduto = item;
-                          });
+                        label: "Categoria",
+                        items: controller.categorias
+                            .map((e) => CategoriaProdutoModel(
+                                id: e.id, categoria: e.categoria))
+                            .toList(),
+                        onChange: (item) {
+                          controller.produtoModel.categoriaProduto = item;
+                        },
+                        itemSelecionado:
+                            controller.produtoModel.categoriaProduto.categoria,
+                      );
                     },
                   ),
                   Observer(
@@ -111,9 +115,10 @@ class _AddProdutoPageState
                               (e) => TipoProdutoModel(id: e.id, tipo: e.tipo),
                             )
                             .toList(),
-
                         onChange: (item) =>
                             controller.produtoModel.tipoProduto = item,
+                        itemSelecionado:
+                            controller.produtoModel.tipoProduto.tipo,
                       );
                     },
                   ),
@@ -133,8 +138,25 @@ class _AddProdutoPageState
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {
-                          controller.adicionarProduto();
+                        onPressed: () async {
+                          var result = await controller.adicionarProduto();
+                          if (result) {
+                            Navigator.of(context).pop();
+                          } else {
+                            showDialog(
+                                context: context,
+                                child: AlertDialog(
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Fechar"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                  content: Text("Erro ao adicionar o produto "),
+                                ));
+                          }
                         },
                       ),
                     ),
